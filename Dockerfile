@@ -9,7 +9,7 @@ RUN apt-get update -qq && apt-get install -y build-essential
 # for a JS runtime, not required for now.
 # RUN apt-get install -y nodejs
 
-ENV APP_HOME /railsapp
+ENV APP_HOME /notesapp
 ENV BUNDLE_PATH /bundle
 
 RUN mkdir $APP_HOME
