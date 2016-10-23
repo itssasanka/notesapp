@@ -10,15 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023013224) do
+ActiveRecord::Schema.define(version: 20161023171659) do
 
   create_table "notes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "title"
     t.text     "content",    limit: 65535
-    t.string   "tag"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.index ["tag"], name: "index_notes_on_tag", unique: true, using: :btree
   end
 
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
+  create_table "tags_notes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "tag_id"
+    t.integer "note_id"
+    t.index ["note_id"], name: "index_tags_notes_on_note_id", using: :btree
+    t.index ["tag_id"], name: "index_tags_notes_on_tag_id", using: :btree
+  end
+
+  add_foreign_key "tags_notes", "notes"
+  add_foreign_key "tags_notes", "tags"
 end
