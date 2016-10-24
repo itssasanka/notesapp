@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   # Notes as resources
   resources :notes
+  # Tags as resources
+  resources :tags
 end
