@@ -14,7 +14,7 @@ class NotesController < ApplicationController
       notes = Note.all
     end
 
-    render json: notes, include: {tags: { only:[:id]}}, status: :ok
+    render json: notes, status: :ok
   end
 
   def show
