@@ -14,7 +14,13 @@ class NotesController < ApplicationController
       notes = Note.all
     end
 
-    render json: notes, include: {tags: {except:[:created_at, :updated_at]}}, status: :ok
+    render json: notes, include: {tags: { only:[:id]}}, status: :ok
+  end
+
+  def show
+      note = Note.find(params[:id])
+      binding.pry
+      render json: note, status: :ok
   end
 
   def destroy
