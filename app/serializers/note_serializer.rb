@@ -1,3 +1,6 @@
 class NoteSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :tag_ids
+	# embed :ids, include: true
+  	attributes :id, :title, :content
+
+  	has_many :tags, :embed => :ids
 end
