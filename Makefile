@@ -6,7 +6,7 @@ notesapp:
 image:
 	docker build -t notesapp_image .
 enter:
-	docker exec -it --rm notesapp bash
+	docker exec -it notesapp bash
 migrate:
 	docker run -it --rm -v $(PWD):/notesapp \
 	--link mysql \

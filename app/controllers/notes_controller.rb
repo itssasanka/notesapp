@@ -19,7 +19,6 @@ class NotesController < ApplicationController
 
   def show
       note = Note.find(params[:id])
-      binding.pry
       render json: note, status: :ok
   end
 
