@@ -2,7 +2,8 @@
 
 notesapp.%:
 	$(HIDE) docker run -it  --rm --name notesapp-$* -v $(PWD):/notesapp \
-	-p 3000:3000 --link mysql -h notesapp \
+    $(if $(filter '$*','server'),-p 3000:3000,) \
+	--link mysql \
 	notesapp_image \
     $(if $(filter '$*','server'),bundle exec rails s --port 3000 -b '0.0.0.0',) \
     $(if $(filter '$*','bundle'),bundle install,) \
