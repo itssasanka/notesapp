@@ -1,10 +1,13 @@
 class NotesController < ApplicationController
   def create
-    verify_params(%w(title content tags))
+    verify_params(%w(title content tag_ids))
 
-    tags = params[:tags].map{|t| Tag.find_or_create_by(name: t)}
-    Note.create(:title => params[:title], :content => params[:content], :tags => tags)
-    render :nothing, :status => :created
+    Note.create(
+        title: params[:title],
+        content: params[:content],
+        tag_ids: params[:tag_ids]
+    )
+    render :nothing, status: :created
   end
 
   def index
@@ -23,13 +26,12 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    verify_params('id')
     Note.find(params[:id]).destroy
     render :nothing, :status => :ok
   end
 
   def edit
-    verify_params(%w(title content tags))
+    verify_params(%w(title content tag_ids))
     note = Note.find(params[:id])
     note.update_attributes(:title => params[:title], :content => params[:content], :tags => tags)
   end
