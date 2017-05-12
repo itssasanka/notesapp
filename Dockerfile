@@ -10,4 +10,3 @@ WORKDIR $APP_HOME
 ADD . $APP_HOME
 
 RUN gem install bundler
-RUN bundle install
