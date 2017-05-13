@@ -1,13 +1,13 @@
 class NotesController < ApplicationController
   def create
-    verify_params(%w(title content tag_ids))
+    verify_params(%w(title content))
 
     Note.create(
         title: params[:title],
         content: params[:content],
         tag_ids: params[:tag_ids]
     )
-    render :nothing, status: :created
+    render json: {ok: true}, status: :created
   end
 
   def index
@@ -31,7 +31,7 @@ class NotesController < ApplicationController
   end
 
   def edit
-    verify_params(%w(title content tag_ids))
+    verify_params(%w(title content))
     note = Note.find(params[:id])
     note.update_attributes(:title => params[:title], :content => params[:content], :tags => tags)
   end
