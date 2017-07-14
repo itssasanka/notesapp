@@ -1,6 +1,4 @@
-FROM ruby:2.3.1
-
-RUN apt-get update -qq && apt-get install -y build-essential
+FROM ruby:2.4.1
 
 ENV APP_HOME /notesapp
 ENV BUNDLE_PATH /notesapp_bundle
