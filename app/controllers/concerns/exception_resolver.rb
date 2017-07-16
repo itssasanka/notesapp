@@ -10,7 +10,10 @@ module ExceptionResolver
   def filter_exception(e)
     case e
       when ActionController::ParameterMissing
-        render json: {error: e.message}, status: :bad_request
+        render json: {errors: [{detail: e.message}]}, status: :bad_request
+      when ActiveRecord::RecordInvalid
+        error_objects = e.record.errors.full_messages.map{|msg| {detail: msg}}
+        render json: {errors: error_objects}, status: :unprocessable_entity
       else
         render error: INTERNAL_ERROR, status: :internal_server_error
     end

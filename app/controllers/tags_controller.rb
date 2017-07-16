@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   def create
     verify_params('name')
     
-    tag = Tag.create(name: params[:name])
+    tag = Tag.create!(name: params[:name])
     render json:tag, status: :created
   end
 
